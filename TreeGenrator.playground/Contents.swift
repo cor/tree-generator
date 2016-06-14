@@ -4,7 +4,9 @@ import UIKit
 import XCPlayground
 
 
-//: ## Vector math extensions
+//: ## Extensions
+
+//: ### Vector math extensions
 /**
  * Adds a CGVector to this CGPoint and returns the result as a new CGPoint.
  */
@@ -27,19 +29,66 @@ public func * (left: CGVector, right: CGVector) -> CGVector {
     return CGVector(dx: left.dx * right.dx, dy: left.dy * right.dy)
 }
 
+//: ### Array extension
+extension Array {
+    func randomItem() -> Element {
+        let index = Int(arc4random_uniform(UInt32(self.count)))
+        return self[index]
+    }
+}
+
+//: ### UIColor extensions
+extension UIColor {
+    
+    func lighter(amount : CGFloat = 0.25) -> UIColor {
+        return hueColorWithBrightnessAmount(1 + amount)
+    }
+    
+    func darker(amount : CGFloat = 0.25) -> UIColor {
+        return hueColorWithBrightnessAmount(1 - amount)
+    }
+    
+    private func hueColorWithBrightnessAmount(amount: CGFloat) -> UIColor {
+        var hue         : CGFloat = 0
+        var saturation  : CGFloat = 0
+        var brightness  : CGFloat = 0
+        var alpha       : CGFloat = 0
+        
+        
+        if getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
+            return UIColor( hue: hue,
+                            saturation: saturation,
+                            brightness: brightness * amount,
+                            alpha: alpha )
+        } else {
+            return self
+        }
+        
+    }
+    
+}
 
 
-//: ## The Model
+//: ## Model
 protocol TreeSegment {
     func draw(position: CGPoint)
 }
 
-struct Twig: TreeSegment {
+class Twig: TreeSegment {
     
     let width: CGFloat
     let direction: CGVector
     let color: UIColor
 
+
+    init(width: CGFloat, direction: CGVector, color: UIColor, segments: [TreeSegment]) {
+        self.width = width
+        self.direction = direction
+        self.color = color
+        self.segments = segments
+    }
+    
+    
     var segments: [TreeSegment]
 
     
@@ -61,9 +110,27 @@ struct Twig: TreeSegment {
         }
     }
     
+    var outerTwigs: [Twig] {
+        get {
+            var result: [Twig] = []
+            
+            let twigs = segments.flatMap { $0 as? Twig }
+            
+            if twigs.isEmpty {
+                result.append(self)
+            } else {
+                for twig in twigs {
+                    result.appendContentsOf(twig.outerTwigs)
+                }
+            }
+            
+            return result
+        }
+    }
+    
 }
 
-struct Flower: TreeSegment {
+class Flower: TreeSegment {
     
     func draw(position: CGPoint) {
         
@@ -72,25 +139,53 @@ struct Flower: TreeSegment {
 
 
 //: ## Generating
-func generateTree(repetitions: Int = 4) -> TreeSegment {
+struct TreeGenerator {
     
-    var segment = Twig(width: 10.0,
-                        direction: CGVector(dx: 10.0, dy: 80.0),
-                        color: [#Color(colorLiteralRed: 0.1288586854934692, green: 0, blue: 0.4869538545608521, alpha: 1)#],
-                        segments: [])
+    let twigDXs: [CGFloat] = [-40, -10, 0, 10, 20]
+    let twigDYs: [CGFloat] = [80, 10, 20, 90, 0]
     
-    segment.segments.append(segment)
+    let iterations = 3
+    let twigsPerIteration = 2
     
-    return segment
-}
+    func tree() -> TreeSegment {
+        let base = Twig(width: 10.0,
+                           direction: CGVector(dx: 0, dy: 80),
+                           color: [#Color(colorLiteralRed: 0.501960814, green: 0.250980407, blue: 0, alpha: 1)#],
+                           segments: [])
 
+        
+        for _ in 0...iterations {
+            let outerTwigs = base.outerTwigs
+            for twig in outerTwigs {
+                addTwigs(twig)
+            }
+        
+        }
+        
+       
+        
+        return base
+    }
+    
+    internal func addTwigs(twig: Twig) {
+        
+        for _ in 0...twigsPerIteration {
+            let subSegment = Twig(width: 8.0,
+                                  direction: CGVector(dx: twigDXs.randomItem(), dy: twigDYs.randomItem()),
+                                  color: twig.color.darker(0.2),
+                                  segments: [])
+            twig.segments.append(subSegment)
+        }
+    }
+}
 
 
 
 //: ## Rendering
 class CanvasView: UIView {
     
-    var tree: TreeSegment = generateTree()
+    
+    var tree: TreeSegment = TreeGenerator().tree()
     
     override func drawRect(rect: CGRect) {
         let startPosition = CGPoint(x: bounds.midX, y: bounds.size.height)
