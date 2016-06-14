@@ -68,6 +68,14 @@ extension UIColor {
     
 }
 
+//: ### CGFloat extension
+public extension CGFloat {
+    /// SwiftRandom extension
+    public static func random(lower: CGFloat = 0, _ upper: CGFloat = 1) -> CGFloat {
+        return CGFloat(Float(arc4random()) / Float(UINT32_MAX)) * (upper - lower) + lower
+    }
+}
+
 
 //: ## Model
 protocol TreeSegment {
@@ -132,8 +140,23 @@ class Twig: TreeSegment {
 
 class Flower: TreeSegment {
     
+    let color: UIColor
+    let radius: CGFloat
+    
+    init(color: UIColor, radius: CGFloat) {
+        self.color = color
+        self.radius = radius
+    }
+    
     func draw(position: CGPoint) {
+        let circlePath = UIBezierPath(arcCenter: position,
+                                      radius: radius,
+                                      startAngle: CGFloat(0),
+                                      endAngle:CGFloat(M_PI * 2),
+                                      clockwise: true)
         
+        color.setFill()
+        circlePath.fill()
     }
 }
 
@@ -141,20 +164,19 @@ class Flower: TreeSegment {
 //: ## Generating
 struct TreeGenerator {
     
-    let twigDXs: [CGFloat] = [-40, -10, 0, 10, 20]
-    let twigDYs: [CGFloat] = [80, 10, 20, 90, 0]
+    let twigDXs: [CGFloat] = [-90, -80, 60, 80]
+    let twigDYs: [CGFloat] = [90, 80, 120, 20]
     
-    let iterations = 3
-    let twigsPerIteration = 2
+    let iterations = [2, 3]
+    let twigsPerIteration = [1, 2, 3]
+    
     
     func tree() -> TreeSegment {
-        let base = Twig(width: 10.0,
-                           direction: CGVector(dx: 0, dy: 80),
-                           color: [#Color(colorLiteralRed: 0.501960814, green: 0.250980407, blue: 0, alpha: 1)#],
-                           segments: [])
-
         
-        for _ in 0...iterations {
+        
+        let base = Twig(width: 30, direction: CGVector(dx: 0, dy: 80), color: [#Color(colorLiteralRed: 0.501960814, green: 0.250980407, blue: 0, alpha: 1)#], segments: [])
+
+        for _ in 0...iterations.randomItem() {
             let outerTwigs = base.outerTwigs
             for twig in outerTwigs {
                 addTwigs(twig)
@@ -162,15 +184,25 @@ struct TreeGenerator {
         
         }
         
-       
+        base.outerTwigs.map(addFlower)
         
         return base
     }
     
+    internal func addFlower(twig: Twig) {
+        
+        let randomMultiplier = CGFloat.random()
+        
+        let flower = Flower(color: [#Color(colorLiteralRed: 0.8100712299346924, green: 0.1511939615011215, blue: 0.4035313427448273, alpha: 1)#].darker(0.5 - randomMultiplier), radius: 30 * randomMultiplier)
+        
+        
+        twig.segments.append(flower)
+    }
+    
     internal func addTwigs(twig: Twig) {
         
-        for _ in 0...twigsPerIteration {
-            let subSegment = Twig(width: 8.0,
+        for _ in 0...twigsPerIteration.randomItem() {
+            let subSegment = Twig(width: 0.6 * twig.width,
                                   direction: CGVector(dx: twigDXs.randomItem(), dy: twigDYs.randomItem()),
                                   color: twig.color.darker(0.2),
                                   segments: [])
@@ -184,7 +216,6 @@ struct TreeGenerator {
 //: ## Rendering
 class CanvasView: UIView {
     
-    
     var tree: TreeSegment = TreeGenerator().tree()
     
     override func drawRect(rect: CGRect) {
@@ -192,8 +223,6 @@ class CanvasView: UIView {
         tree.draw(startPosition)
     }
 }
-
-
 
 let canvasFrame = CGRect(x: 0, y: 0, width: 800, height: 800)
 let canvas = CanvasView(frame: canvasFrame)
