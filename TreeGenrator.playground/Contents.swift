@@ -214,6 +214,9 @@ struct TreeGenerator {
 
 
 //: ## Rendering
+
+let treeCount = 50
+
 class CanvasView: UIView {
     
     var tree: TreeSegment = TreeGenerator().tree()
@@ -224,12 +227,16 @@ class CanvasView: UIView {
     }
 }
 
-let canvasFrame = CGRect(x: 0, y: 0, width: 800, height: 800)
-let canvas = CanvasView(frame: canvasFrame)
+for i in 0...treeCount {
+ 
+    
+    let canvasFrame = CGRect(x: 0, y: 0, width: 800, height: 800)
+    let canvas = CanvasView(frame: canvasFrame)
+    
+    canvas.backgroundColor = [#Color(colorLiteralRed: 1, green: 0.9999743700027466, blue: 0.9999912977218628, alpha: 1)#]
+    
+    
+    XCPlaygroundPage.currentPage.captureValue(canvas, withIdentifier: "tree \(i)")
+    
 
-canvas.backgroundColor = [#Color(colorLiteralRed: 1, green: 0.9999743700027466, blue: 0.9999912977218628, alpha: 1)#]
-
-
-XCPlaygroundPage.currentPage.captureValue(canvas, withIdentifier: "result")
-
-
+}
