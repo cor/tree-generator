@@ -113,9 +113,8 @@ class Twig: TreeSegment {
         color.setStroke()
         path.stroke()
         
-        for segment in segments {
-            segment.draw(endPoint)
-        }
+        segments.map { $0.draw(endPoint) }
+        
     }
     
     var outerTwigs: [Twig] {
@@ -127,9 +126,7 @@ class Twig: TreeSegment {
             if twigs.isEmpty {
                 result.append(self)
             } else {
-                for twig in twigs {
-                    result.appendContentsOf(twig.outerTwigs)
-                }
+                twigs.map { result.appendContentsOf($0.outerTwigs) }
             }
             
             return result
@@ -164,8 +161,11 @@ class Flower: TreeSegment {
 //: ## Generating
 struct TreeGenerator {
     
-    let twigDXs: [CGFloat] = [-90, -80, 60, 80]
-    let twigDYs: [CGFloat] = [90, 80, 120, 20]
+    let lowerDX: CGFloat = -80
+    let upperDX: CGFloat = 80
+    
+    let lowerDY: CGFloat = 40
+    let upperDY: CGFloat = 120
     
     let iterations = [2, 3]
     let twigsPerIteration = [1, 2, 3]
@@ -201,7 +201,7 @@ struct TreeGenerator {
         
         for _ in 0...twigsPerIteration.randomItem() {
             let subSegment = Twig(width: 0.6 * twig.width,
-                                  direction: CGVector(dx: twigDXs.randomItem(), dy: twigDYs.randomItem()),
+                                  direction: CGVector(dx: CGFloat.random(lowerDX, upperDX), dy: CGFloat.random(lowerDY, upperDY)),
                                   color: twig.color.darker(0.2),
                                   segments: [])
             twig.segments.append(subSegment)
@@ -213,7 +213,7 @@ struct TreeGenerator {
 
 //: ## Rendering
 // specify the amount of trees to render
-let treeCount = 5
+let treeCount = 15
 
 class CanvasView: UIView {
     
