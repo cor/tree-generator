@@ -16,6 +16,7 @@
 		870075241D10D01F00693D11 /* TreeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870075231D10D01F00693D11 /* TreeGenerator.swift */; };
 		870075261D10D0AD00693D11 /* TreeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870075251D10D0AD00693D11 /* TreeModel.swift */; };
 		870075281D10D0D700693D11 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870075271D10D0D700693D11 /* Extensions.swift */; };
+		87919BCD1D10DC8D008DB736 /* logo-square monochrome.png in Resources */ = {isa = PBXBuildFile; fileRef = 87919BCC1D10DC8D008DB736 /* logo-square monochrome.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		870075231D10D01F00693D11 /* TreeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeGenerator.swift; sourceTree = "<group>"; };
 		870075251D10D0AD00693D11 /* TreeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeModel.swift; sourceTree = "<group>"; };
 		870075271D10D0D700693D11 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		87919BCC1D10DC8D008DB736 /* logo-square monochrome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-square monochrome.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				870075231D10D01F00693D11 /* TreeGenerator.swift */,
 				870075251D10D0AD00693D11 /* TreeModel.swift */,
 				870075271D10D0D700693D11 /* Extensions.swift */,
+				87919BCC1D10DC8D008DB736 /* logo-square monochrome.png */,
 			);
 			path = TreeGenerator;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 				8700751A1D10CF6400693D11 /* LaunchScreen.storyboard in Resources */,
 				870075171D10CF6400693D11 /* Assets.xcassets in Resources */,
 				870075151D10CF6400693D11 /* Main.storyboard in Resources */,
+				87919BCD1D10DC8D008DB736 /* logo-square monochrome.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +315,7 @@
 				870075201D10CF6400693D11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
