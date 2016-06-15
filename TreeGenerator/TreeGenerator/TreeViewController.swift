@@ -11,7 +11,10 @@ import UIKit
 class TreeViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var shouldAutoRefresh = true
+    var shouldHyperRefresh = false
+    
     let autoRefreshInterval = 2.0
+    let hyperRefreshInterval = 0.05
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +26,22 @@ class TreeViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Autorefresh every autoRefreshInterval seconds
         NSTimer.scheduledTimerWithTimeInterval(autoRefreshInterval, target: self, selector: #selector(self.autoRefresh), userInfo: nil, repeats: true)
+        
+        // Hyperrefresh every hyperRefreshInterval seconds
+        NSTimer.scheduledTimerWithTimeInterval(hyperRefreshInterval, target: self, selector: #selector(self.hyperRefresh), userInfo: nil, repeats: true)
+
     }
     
     @IBAction func switchUpdated(sender: UISwitch) {
-        shouldAutoRefresh = sender.on
+        
+        if let id = sender.restorationIdentifier {
+            switch id {
+            case "autoRefresh": shouldAutoRefresh = sender.on
+            case "hyperRefresh": shouldHyperRefresh = sender.on
+            default: break
+            }
+        }
+      
     }
     
     func refresh() {
@@ -35,6 +50,11 @@ class TreeViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func autoRefresh() {
         if shouldAutoRefresh {
+            refresh()
+        }
+    }
+    func hyperRefresh() {
+        if shouldHyperRefresh {
             refresh()
         }
     }

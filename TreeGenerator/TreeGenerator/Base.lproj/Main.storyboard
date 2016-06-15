@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDh-ZJ-CaO">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="autoRefresh" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDh-ZJ-CaO">
                                 <rect key="frame" x="8" y="561" width="51" height="31"/>
                                 <connections>
                                     <action selector="switchUpdated:" destination="BYZ-38-t0r" eventType="valueChanged" id="DeN-Jr-UES"/>
@@ -38,12 +38,20 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="hyperRefresh" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Atp-RW-3sB">
+                                <rect key="frame" x="65" y="561" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchUpdated:" destination="BYZ-38-t0r" eventType="valueChanged" id="rZY-gc-vjI"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="5wZ-4z-JfR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8b9-YK-5MC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Atp-RW-3sB" secondAttribute="bottom" constant="8" id="EVb-6h-Hpe"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rDh-ZJ-CaO" secondAttribute="bottom" constant="8" id="ODw-nH-1aV"/>
+                            <constraint firstItem="Atp-RW-3sB" firstAttribute="leading" secondItem="rDh-ZJ-CaO" secondAttribute="trailing" constant="8" id="Qm6-ZA-e0U"/>
                             <constraint firstItem="5wZ-4z-JfR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="QqF-mI-4Pr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZWF-uq-qkg" secondAttribute="trailing" id="THN-1z-0hx"/>
                             <constraint firstItem="rDh-ZJ-CaO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="bZB-bH-c0i"/>
