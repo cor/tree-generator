@@ -79,3 +79,22 @@ public extension CGFloat {
     }
 }
 
+// MARK: - Multiple times extension
+extension Int {
+    func times(f: () -> ()) {
+        if self > 0 {
+            for _ in 0..<self {
+                f()
+            }
+        }
+    }
+    
+    func times(@autoclosure f: () -> ()) {
+        if self > 0 {
+            for _ in 0..<self {
+                f()
+            }
+        }
+    }
+}
+
