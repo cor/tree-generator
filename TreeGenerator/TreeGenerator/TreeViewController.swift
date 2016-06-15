@@ -32,6 +32,10 @@ class TreeViewController: UIViewController, UIGestureRecognizerDelegate {
 
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     @IBAction func switchUpdated(sender: UISwitch) {
         
         if let id = sender.restorationIdentifier {
