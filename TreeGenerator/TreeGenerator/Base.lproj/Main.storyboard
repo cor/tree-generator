@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tree View Controller-->
@@ -18,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDh-ZJ-CaO">
-                                <rect key="frame" x="543" y="561" width="51" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rDh-ZJ-CaO">
+                                <rect key="frame" x="8" y="561" width="51" height="31"/>
                                 <connections>
                                     <action selector="switchUpdated:" destination="BYZ-38-t0r" eventType="valueChanged" id="DeN-Jr-UES"/>
                                 </connections>
@@ -28,8 +27,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="rDh-ZJ-CaO" secondAttribute="trailing" id="5FM-SD-6dX"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rDh-ZJ-CaO" secondAttribute="bottom" constant="8" id="ODw-nH-1aV"/>
+                            <constraint firstItem="rDh-ZJ-CaO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="bZB-bH-c0i"/>
                         </constraints>
                     </view>
                 </viewController>
