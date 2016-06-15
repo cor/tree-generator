@@ -26,7 +26,7 @@
                                 </connections>
                             </switch>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-square monochrome.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZWF-uq-qkg">
-                                <rect key="frame" x="480" y="500" width="100" height="100"/>
+                                <rect key="frame" x="480" y="498" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZWF-uq-qkg" secondAttribute="height" multiplier="1:1" id="C1U-zr-BaW"/>
                                     <constraint firstAttribute="width" constant="100" id="aB5-pD-uGt"/>
@@ -55,7 +55,7 @@
                             <constraint firstItem="5wZ-4z-JfR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="QqF-mI-4Pr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZWF-uq-qkg" secondAttribute="trailing" id="THN-1z-0hx"/>
                             <constraint firstItem="rDh-ZJ-CaO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="bZB-bH-c0i"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZWF-uq-qkg" secondAttribute="bottom" id="sLa-qK-dF2"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZWF-uq-qkg" secondAttribute="bottom" constant="2" id="sLa-qK-dF2"/>
                         </constraints>
                     </view>
                 </viewController>
