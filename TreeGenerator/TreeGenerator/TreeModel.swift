@@ -17,7 +17,7 @@ class Twig: TreeSegment {
     let width: CGFloat
     let direction: CGVector
     let color: UIColor
-    
+    var segments: [TreeSegment]
     
     init(width: CGFloat, direction: CGVector, color: UIColor, segments: [TreeSegment]) {
         self.width = width
@@ -26,41 +26,31 @@ class Twig: TreeSegment {
         self.segments = segments
     }
     
-    
-    var segments: [TreeSegment]
-    
-    
     func draw(position: CGPoint) {
         
         let path = UIBezierPath()
         
+        // Configure appearance
+        path.lineWidth = width
+        color.setStroke()
+        
+        // Define path
         path.moveToPoint(position)
         let endPoint = position + (direction * CGVector(dx: 1, dy: -1))
         path.addLineToPoint(endPoint)
         
-        path.lineWidth = width
-        
-        color.setStroke()
         path.stroke()
         
-        segments.map { $0.draw(endPoint) }
+        // Draw all sub segments
+        segments.forEach { $0.draw(endPoint) }
         
     }
     
     var outerTwigs: [Twig] {
-        get {
-            var result: [Twig] = []
-            
-            let twigs = segments.flatMap { $0 as? Twig }
-            
-            if twigs.isEmpty {
-                result.append(self)
-            } else {
-                twigs.map { result.appendContentsOf($0.outerTwigs) }
-            }
-            
-            return result
-        }
+        let result = segments
+            .flatMap { $0 as? Twig }                // Take only the TreeSegments that are Twig's
+            .flatMap { $0.outerTwigs }              // Get the outerTwigs of every Twig
+        return result.isEmpty ? [self] : result     // This is an outerTwig if result is empty.
     }
     
 }
@@ -76,13 +66,7 @@ class Flower: TreeSegment {
     }
     
     func draw(position: CGPoint) {
-        let circlePath = UIBezierPath(arcCenter: position,
-                                      radius: radius,
-                                      startAngle: CGFloat(0),
-                                      endAngle:CGFloat(M_PI * 2),
-                                      clockwise: true)
-        
         color.setFill()
-        circlePath.fill()
+        UIBezierPath(arcCenter: position, radius: radius, startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true).fill()
     }
 }

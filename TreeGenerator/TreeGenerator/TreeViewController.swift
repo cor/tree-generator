@@ -19,7 +19,7 @@ class TreeViewController: UIViewController, UIGestureRecognizerDelegate {
         tap.delegate = self
         view.addGestureRecognizer(tap)
         
-        let timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.autoRefresh), userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.autoRefresh), userInfo: nil, repeats: true)
     }
     
     func screenTapped(sender: UIView) {
