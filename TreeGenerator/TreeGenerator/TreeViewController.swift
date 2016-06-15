@@ -11,42 +11,32 @@ import UIKit
 class TreeViewController: UIViewController, UIGestureRecognizerDelegate {
 
     var shouldAutoRefresh = true
+    let autoRefreshInterval = 2.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.screenTapped(_:)))
+
+        // Call refresh() when the screen is tapped
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.refresh))
         tap.delegate = self
         view.addGestureRecognizer(tap)
         
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.autoRefresh), userInfo: nil, repeats: true)
-    }
-    
-    func screenTapped(sender: UIView) {
-        refresh()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Autorefresh every autoRefreshInterval seconds
+        NSTimer.scheduledTimerWithTimeInterval(autoRefreshInterval, target: self, selector: #selector(self.autoRefresh), userInfo: nil, repeats: true)
     }
     
     @IBAction func switchUpdated(sender: UISwitch) {
-        if sender.on {
-            shouldAutoRefresh = true
-        } else {
-            shouldAutoRefresh = false
-        }
+        shouldAutoRefresh = sender.on
+    }
+    
+    func refresh() {
+        view.setNeedsDisplay()
     }
     
     func autoRefresh() {
         if shouldAutoRefresh {
             refresh()
         }
-    }
-    
-    func refresh() {
-        view.setNeedsDisplay()
     }
  
 }
