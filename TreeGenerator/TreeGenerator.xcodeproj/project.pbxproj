@@ -112,6 +112,7 @@
 					8700750B1D10CF6400693D11 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 9RS3Y87D23;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -279,6 +280,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.corcoder.TreeGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -293,6 +295,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.corcoder.TreeGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

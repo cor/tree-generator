@@ -25,23 +25,23 @@ class TreeViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addGestureRecognizer(tap)
         
         // Autorefresh every autoRefreshInterval seconds
-        NSTimer.scheduledTimerWithTimeInterval(autoRefreshInterval, target: self, selector: #selector(self.autoRefresh), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: autoRefreshInterval, target: self, selector: #selector(self.autoRefresh), userInfo: nil, repeats: true)
         
         // Hyperrefresh every hyperRefreshInterval seconds
-        NSTimer.scheduledTimerWithTimeInterval(hyperRefreshInterval, target: self, selector: #selector(self.hyperRefresh), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: hyperRefreshInterval, target: self, selector: #selector(self.hyperRefresh), userInfo: nil, repeats: true)
 
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    @IBAction func switchUpdated(sender: UISwitch) {
+    @IBAction func switchUpdated(_ sender: UISwitch) {
         
         if let id = sender.restorationIdentifier {
             switch id {
-            case "autoRefresh": shouldAutoRefresh = sender.on
-            case "hyperRefresh": shouldHyperRefresh = sender.on
+            case "autoRefresh": shouldAutoRefresh = sender.isOn
+            case "hyperRefresh": shouldHyperRefresh = sender.isOn
             default: break
             }
         }

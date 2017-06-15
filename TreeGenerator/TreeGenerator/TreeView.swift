@@ -13,7 +13,7 @@ class TreeView: UIView {
 
     var tree: TreeSegment = TreeGenerator().tree()
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let startPosition = CGPoint(x: bounds.midX, y: bounds.size.height)
         tree = TreeGenerator().tree()
         tree.draw(startPosition)

@@ -42,7 +42,7 @@ struct TreeGenerator {
         return base
     }
     
-    internal func addFlower(twig: Twig) {
+    internal func addFlower(_ twig: Twig) {
         
         let randomMultiplier = CGFloat.random()
         let flower = Flower(color: flowerBaseColor.darker(0.5 - randomMultiplier), radius: 30 * randomMultiplier)
@@ -50,7 +50,7 @@ struct TreeGenerator {
         twig.segments.append(flower)
     }
     
-    internal func addTwigs(twig: Twig) {
+    internal func addTwigs(_ twig: Twig) {
         
         twigsPerIteration.randomItem().times {
             let subSegment = Twig(width: 0.6 * twig.width,

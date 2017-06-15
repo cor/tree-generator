@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TreeSegment {
-    func draw(position: CGPoint)
+    func draw(_ position: CGPoint)
 }
 
 class Twig: TreeSegment {
@@ -26,7 +26,7 @@ class Twig: TreeSegment {
         self.segments = segments
     }
     
-    func draw(position: CGPoint) {
+    func draw(_ position: CGPoint) {
         
         let path = UIBezierPath()
         
@@ -35,9 +35,9 @@ class Twig: TreeSegment {
         color.setStroke()
         
         // Define path
-        path.moveToPoint(position)
+        path.move(to: position)
         let endPoint = position + (direction * CGVector(dx: 1, dy: -1))
-        path.addLineToPoint(endPoint)
+        path.addLine(to: endPoint)
         
         path.stroke()
         
@@ -65,7 +65,7 @@ class Flower: TreeSegment {
         self.radius = radius
     }
     
-    func draw(position: CGPoint) {
+    func draw(_ position: CGPoint) {
         color.setFill()
         UIBezierPath(arcCenter: position, radius: radius, startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true).fill()
     }

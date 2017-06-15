@@ -43,15 +43,15 @@ extension Array {
 // MARK: - UIColor extensions
 extension UIColor {
     
-    func lighter(amount : CGFloat = 0.25) -> UIColor {
+    func lighter(_ amount : CGFloat = 0.25) -> UIColor {
         return hueColorWithBrightnessAmount(1 + amount)
     }
     
-    func darker(amount : CGFloat = 0.25) -> UIColor {
+    func darker(_ amount : CGFloat = 0.25) -> UIColor {
         return hueColorWithBrightnessAmount(1 - amount)
     }
     
-    private func hueColorWithBrightnessAmount(amount: CGFloat) -> UIColor {
+    fileprivate func hueColorWithBrightnessAmount(_ amount: CGFloat) -> UIColor {
         var hue         : CGFloat = 0
         var saturation  : CGFloat = 0
         var brightness  : CGFloat = 0
@@ -74,14 +74,14 @@ extension UIColor {
 // MARK: - Random number generation
 public extension CGFloat {
     /// SwiftRandom extension
-    public static func random(lower: CGFloat = 0, _ upper: CGFloat = 1) -> CGFloat {
+    public static func random(_ lower: CGFloat = 0, _ upper: CGFloat = 1) -> CGFloat {
         return CGFloat(Float(arc4random()) / Float(UINT32_MAX)) * (upper - lower) + lower
     }
 }
 
 // MARK: - Multiple times extension
 extension Int {
-    func times(f: () -> ()) {
+    func times(_ f: () -> ()) {
         if self > 0 {
             for _ in 0..<self {
                 f()
@@ -89,7 +89,7 @@ extension Int {
         }
     }
     
-    func times(@autoclosure f: () -> ()) {
+    func times(_ f: @autoclosure () -> ()) {
         if self > 0 {
             for _ in 0..<self {
                 f()
