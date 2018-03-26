@@ -67,6 +67,6 @@ class Flower: TreeSegment {
     
     func draw(_ position: CGPoint) {
         color.setFill()
-        UIBezierPath(arcCenter: position, radius: radius, startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true).fill()
+        UIBezierPath(arcCenter: position, radius: radius, startAngle: 0, endAngle: .pi * 2, clockwise: true).fill()
     }
 }

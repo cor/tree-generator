@@ -48,16 +48,16 @@ class TreeViewController: UIViewController, UIGestureRecognizerDelegate {
       
     }
     
-    func refresh() {
+    @objc func refresh() {
         view.setNeedsDisplay()
     }
     
-    func autoRefresh() {
+    @objc func autoRefresh() {
         if shouldAutoRefresh {
             refresh()
         }
     }
-    func hyperRefresh() {
+    @objc func hyperRefresh() {
         if shouldHyperRefresh {
             refresh()
         }
